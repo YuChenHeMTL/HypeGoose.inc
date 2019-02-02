@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'main',
     'clothes.apps.ClothesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
