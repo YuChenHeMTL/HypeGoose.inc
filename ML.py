@@ -11,34 +11,15 @@ visual_recognition = VisualRecognitionV3 (
 try:
     # Invoke a Visual Recognition method
     classifiers = visual_recognition.list_classifiers(verbose=True).get_result()
-    print (json.dumps(classifiers, indent=2))
-    print ((classifiers))
+    #print (json.dumps(classifiers, indent=2))
+    #print ((classifiers))
     for i in classifiers ['classifiers']:
         x = i ['classifier_id']
-        visual_recognition.delete_classifier(x)
+        with open ('./first.jpg','rb') as image_file:
+            classes = visual_recognition.classify(
+                image_file,
+                threshold= '0.0',
+                owners= ["me"],classifier_ids=x).get_result()
+            print (json.dumps(classes,indent =2))
 except WatsonApiException as ex:
     print "Method failed with status code " + str(ex.code) + ": " + ex.message
-
-
-
-with open('./testingData/beagle.zip', 'rb') as beagle, open(
-        './testingData/golden-retriever.zip', 'rb') as goldenretriever, open(
-            './testingData/husky.zip', 'rb') as husky, open(
-                './testingData/cats.zip', 'rb') as cats:
-    model = visual_recognition.create_classifier(
-        'dogs',
-        beagle_positive_examples=beagle,
-        goldenretriever_positive_examples=goldenretriever,
-        husky_positive_examples=husky,
-        negative_examples=cats).get_result()
-print(json.dumps(model, indent=2))
-modelID = ""
-
-modelID = model ['classifier_id']
-
-with open ('./first.jpg','rb') as image_file:
-    classes = visual_recognition.classify(
-        image_file,
-        threshold= '0.5',
-        owners= ["me"],classifier_ids=modelID).get_result()
-    print (json.dumps(classes,indent =2))
