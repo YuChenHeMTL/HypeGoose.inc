@@ -97,17 +97,7 @@ $(document).ready(function() {
   
 
 
-  /* home slideshow section
-  -----------------------------------------------*/
-  $(function(){
-    jQuery(document).ready(function() {
-    $('#home').backstretch([
-       "images/home-bg-slideshow1.jpg", 
-       "images/home-bg-slideshow2.jpg",
-       "images/home-bg-slideshow3.jpg",
-        ],  {duration: 2000, fade: 750});
-    });
-  })
+
 
 
    /* Flexslider
